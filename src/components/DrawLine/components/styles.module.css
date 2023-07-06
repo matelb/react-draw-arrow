@@ -1,0 +1,40 @@
+.stroke path {
+  stroke-dasharray: 20;
+}
+.stroke.animate path {
+  animation: dash 12s linear infinite;
+}
+.stroke.animate.reverse path {
+  animation: dash-reverse 12s linear infinite;
+}
+
+.dot {
+  fill: red;
+  z-index: 99;
+}
+.cp {
+  fill: red;
+  z-index: 99;
+}
+
+.label {
+  padding: 1rem;
+  box-shadow: 0 0 6px 0px rgba(134, 134, 134, 0.452);
+  width: fit-content;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px) saturate(200%);
+  padding: 0.5rem 0.9rem;
+  z-index: 1;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+@keyframes dash-reverse {
+  to {
+    stroke-dashoffset: 1000;
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "react-draw-arrow",
+  "version": "1.0.0",
+  "description": "React-draw-arrow is a project that easily different various components with a simple arrow or line.",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "line",
+    "lines",
+    "arrow",
+    "arrows",
+    "connect",
+    "between",
+    "draw",
+    "react-draw-arrow"
+  ],
+  "author": "Adrian Matesanz",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.4.0",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "classnames": "^2.3.2",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "files": [
+    "lib",
+    "LICENSE",
+    "README.md"
+  ]
+}
