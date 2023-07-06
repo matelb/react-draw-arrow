@@ -41,8 +41,8 @@ const App = () => {
 
 ### Examples
 
-https://codesandbox.io/s/suspicious-butterfly-x6hk2g
-https://codesandbox.io/s/lucid-dijkstra-dn8qpq
+- https://codesandbox.io/s/suspicious-butterfly-x6hk2g
+- https://codesandbox.io/s/lucid-dijkstra-dn8qpq
 
 ### Built-in Box
 
@@ -148,22 +148,80 @@ const App = () => {
 };
 ```
 
+#### Custom animation component
+
+Animation components are embedded inside "g" svg component.
+
+```jsx
+const DEFAULT_COLOR = "black";
+
+const AnimationComponent = ({
+  path,
+  duration,
+  delay,
+  color,
+  reverse,
+}: AnimationComponentProps) => {
+  const [running, setRunning] = useState<boolean>(false);
+  const ref = useRef<SVGElement>(null);
+  const backgroundColor = color ? color : DEFAULT_COLOR;
+
+  function toggleRunning(isRunnging: boolean) {
+    setRunning(isRunnging);
+  }
+
+  useEffect(() => {
+    const animationRef = ref.current;
+    if (animationRef) {
+      animationRef.addEventListener("beginEvent", () => toggleRunning(true));
+      animationRef.addEventListener("endEvent", () => toggleRunning(false));
+    }
+    return () => {
+      if (animationRef) {
+        animationRef.removeEventListener("beginEvent", () =>
+          toggleRunning(true)
+        );
+        animationRef.removeEventListener("beginEvent", () =>
+          toggleRunning(false)
+        );
+      }
+    };
+  }, []);
+  return (
+       <circle r={8} fill={running ? backgroundColor : "none"}>
+        <animateMotion
+          dur={duration}
+          repeatCount="indefinite"
+          path={path}
+          keyPoints={reverse ? "1;0" : "0;1"}
+          keyTimes="0;1"
+          begin={delay}
+          ref={ref}
+          offset={-100}
+          startOffset={-100}
+        />
+      </circle>
+      />
+  );
+};
+```
+
 ## Props
 
-| Property             | Description                                              | Type                                                |
-| -------------------- | -------------------------------------------------------- | --------------------------------------------------- |
-| mainComponent?       | Main component                                           | RefObject<HTMLElement> or string                    |
-| childrens?           | Childrens of main component                              | RefObject<HTMLElement>[] or string[]                |
-| animate?             | Animate arrow                                            | boolean                                             |
-| showDots?            | Show control position,start point and end point af arrow | boolean                                             |
-| showStartArrow?      | Show start arrow marker                                  | boolean                                             |
-| showEndArrow?        | Show end arrow marker                                    | boolean                                             |
-| label?               | Label                                                    | string                                              |
-| animationInput?      | Input of animation component                             | (props: AnimationComponentProps) => React.ReactNode |
-| labelInput?          | Input of label component                                 | React.ReactNode                                     |
-| animationConfig?     | Animation configuration                                  | [AnimationConfigProps](#animationConfigProps)       |
-| pathConfig?          | Path configuration                                       | [PathConfigProps](#pathConfigProps)                 |
-| markerConfiguration? | Marker configuration                                     | [MarkerConfigProps](#markerConfigProps)             |
+| Property             | Description                                              | Type                                                                             |
+| -------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| mainComponent?       | Main component                                           | RefObject<HTMLElement> or string                                                 |
+| childrens?           | Childrens of main component                              | RefObject<HTMLElement>[] or string[]                                             |
+| animate?             | Animate arrow                                            | boolean                                                                          |
+| showDots?            | Show control position,start point and end point af arrow | boolean                                                                          |
+| showStartArrow?      | Show start arrow marker                                  | boolean                                                                          |
+| showEndArrow?        | Show end arrow marker                                    | boolean                                                                          |
+| label?               | Label                                                    | string                                                                           |
+| animationInput?      | Input of animation component                             | (props: [AnimationComponentProps](#animationComponentProps) ) => React.ReactNode |
+| labelInput?          | Input of label component                                 | React.ReactNode                                                                  |
+| animationConfig?     | Animation configuration                                  | [AnimationConfigProps](#animationConfigProps)                                    |
+| pathConfig?          | Path configuration                                       | [PathConfigProps](#pathConfigProps)                                              |
+| markerConfiguration? | Marker configuration                                     | [MarkerConfigProps](#markerConfigProps)                                          |
 
 ## AnimationConfigProps
 
@@ -178,6 +236,17 @@ const App = () => {
 | curveStyle? | Curve style of arrow | number
 | blur? | Blur mode | boolean
 | offset? | Offset of control point regarding curve (defualt 60) | "beizer" -"straight" - "curve"
+| color? | Animation color | string
+
+## AnimationComponentProps
+
+<a name="animationComponentProps"></a>
+| Property | Description | Type |
+| ------------- | ------------- | ------------- |
+| duration? | Duration of animation |number
+| delay? | Delay of animation |number
+| path? | Path of animation | string
+| reverse? |Animation reverse mode | number
 | color? | Animation color | string
 
 ## PathConfigProps
