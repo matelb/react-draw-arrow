@@ -4,7 +4,8 @@ Connect components with a simple arrow or line
 
 ### Getting Started
 
-```bash
+```shell
+# Install the library
 npm install react-draw-arrow
 yarn add react-draw-arrow
 ```

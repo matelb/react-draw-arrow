@@ -33,6 +33,10 @@
     "react-draggable": "^4.4.5",
     "classnames": "^2.3.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matelb/react-draw-arrow"
+  },
   "devDependencies": {
     "@types/node": "^20.4.0",
     "@types/react": "^18.2.14",
