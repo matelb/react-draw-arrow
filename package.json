@@ -1,17 +1,19 @@
 {
   "name": "react-draw-arrow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React-draw-arrow is a project that easily different various components with a simple arrow or line.",
   "main": "./lib/cjs/index.js",
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build": "yarn run clean && yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc && tscp",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs && tscp",
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
     "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint"
+    "prepublishOnly": "npm test && npm run lint",
+    "test": "",
+    "clean": "rimraf lib/"
   },
   "keywords": [
     "react",
@@ -40,7 +42,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.5",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "typescript-cp": "^0.1.8"
   },
   "peerDependencies": {
     "react": ">=16"
