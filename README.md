@@ -14,8 +14,8 @@ yarn add react-draw-arrow
 import { DrawLine, WaterDrop } from "react-draw-arrow";
 
 const App = () => {
-  const box1 = useRef < HTMLDivElement > null;
-  const box2 = useRef < HTMLDivElement > null;
+  const box1 = useRef<HTMLDivElement>(null);
+  const box2 = useRef<HTMLDivElement>(null);
   return (
     <>
       <div ref={box1} />
@@ -52,8 +52,8 @@ Box is built with react-draggable, you can use it or use whatever element you wa
 import { DrawLine, WaterDrop, Box } from "react-draw-arrow";
 
 const App = () => {
-  const box1 = useRef < HTMLDivElement > null;
-  const box2 = useRef < HTMLDivElement > null;
+  const box1 = useRef<HTMLDivElement>(null);
+  const box2 = useRef<HTMLDivElement>(null);
   return (
     <>
       <Box ref={box1} defaultPosition={{ x: 100, y: 50 }}>
@@ -92,8 +92,8 @@ const App = () => {
 import { DrawLine, Circle } from "react-draw-arrow";
 
 const App = () => {
-  const box1 = useRef < HTMLDivElement > null;
-  const box2 = useRef < HTMLDivElement > null;
+  const box1 = useRef<HTMLDivElement>(null);
+  const box2 = useRef<HTMLDivElement>(null);
   return (
     <>
       <div ref={box1} />
@@ -123,8 +123,8 @@ const App = () => {
 import { DrawLine, WaterDrop } from "react-draw-arrow";
 
 const App = () => {
-  const box1 = useRef < HTMLDivElement > null;
-  const box2 = useRef < HTMLDivElement > null;
+  const box1 = useRef<HTMLDivElement>(null);
+  const box2 = useRef<HTMLDivElement>(null);
   return (
     <>
       <div ref={box1} />
