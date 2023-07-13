@@ -17,17 +17,17 @@ import {
   DotPosition,
   PathConfigProps,
   PathProps,
-  DrawLinePosition,
+  DrawArrowPosition,
   MarkerConfigProps,
 } from "./types";
 import { AnimationComponentProps } from "./animation/components/types";
 import { AnimationWrapper } from "./animation";
 
-interface DrawLineProps {
+interface DrawArrowProps {
   animationConfig?: AnimationConfigProps;
   pathConfig?: PathConfigProps;
   mainComponent: RefObject<HTMLElement> | string;
-  childrens: RefObject<HTMLElement>[] | string[];
+  childComponents: RefObject<HTMLElement>[] | string[];
   animate?: boolean;
   showDots?: boolean;
   animationInput?: (props: AnimationComponentProps) => React.ReactNode;
@@ -39,14 +39,14 @@ interface DrawLineProps {
 }
 
 interface Item {
-  cp: DrawLinePosition;
-  labelPosition: DrawLinePosition;
+  cp: DrawArrowPosition;
+  labelPosition: DrawArrowPosition;
   path: PathProps;
   box: BoxProps;
   dots: DotPosition;
 }
 
-const DrawLine = ({
+const DrawArrow = ({
   animationConfig = {
     duration: 3,
     delay: 1,
@@ -61,7 +61,7 @@ const DrawLine = ({
     blur: false,
   },
   mainComponent,
-  childrens,
+  childComponents,
   animate = false,
   showDots,
   animationInput,
@@ -70,7 +70,7 @@ const DrawLine = ({
   markerConfiguration,
   label,
   labelInput,
-}: DrawLineProps): JSX.Element => {
+}: DrawArrowProps): JSX.Element => {
   const gradientId = useId();
   const markerStartId = useId();
   const markerEndId = useId();
@@ -108,7 +108,7 @@ const DrawLine = ({
 
   const getBounds = useCallback(() => {
     const mainRef = getRef(mainComponent);
-    const childrenRefs = getRefs(childrens);
+    const childrenRefs = getRefs(childComponents);
     if (mainRef && childrenRefs) {
       const startBounds = mainRef.getBoundingClientRect();
       if (startBounds) {
@@ -122,13 +122,13 @@ const DrawLine = ({
         execute(startBounds, cBounds);
       }
     }
-  }, [mainComponent, childrens, execute]);
+  }, [mainComponent, childComponents, execute]);
 
   useEffect(() => {
     const observer = new MutationObserver(getBounds);
     const mainRef = getRef(mainComponent);
-    const childrenRefs = getRefs(childrens);
-    if (mainRef && childrens) {
+    const childrenRefs = getRefs(childComponents);
+    if (mainRef && childComponents) {
       const observeProps: MutationObserverInit = {
         attributes: true,
         characterData: false,
@@ -145,7 +145,7 @@ const DrawLine = ({
     return () => {
       observer.disconnect();
     };
-  }, [mainComponent, childrens, getBounds]);
+  }, [mainComponent, childComponents, getBounds]);
 
   return (
     <>
@@ -214,4 +214,4 @@ const DrawLine = ({
   );
 };
 
-export default memo(DrawLine);
+export default memo(DrawArrow);

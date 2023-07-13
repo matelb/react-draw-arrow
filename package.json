@@ -1,7 +1,7 @@
 {
   "name": "react-draw-arrow",
-  "version": "1.0.23",
-  "description": "React-draw-arrow is a project that easily different various components with a simple arrow or line.",
+  "version": "1.0.24",
+  "description": "React-draw-arrow is a project that easily different various components with a simple arrow.",
   "main": "./lib/cjs/index.js",
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -30,7 +30,6 @@
   "author": "Adrian Matesanz",
   "license": "MIT",
   "dependencies": {
-    "react-draggable": "^4.4.5",
     "classnames": "^2.3.2"
   },
   "repository": {

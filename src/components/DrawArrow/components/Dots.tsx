@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { DrawLinePosition } from "../types";
+import { DrawArrowPosition } from "../types";
 
 export interface DotColor {
   color: string;
@@ -7,10 +7,10 @@ export interface DotColor {
 
 interface DotsProps {
   dots: {
-    start: DrawLinePosition;
-    end: DrawLinePosition;
+    start: DrawArrowPosition;
+    end: DrawArrowPosition;
   };
-  cp?: DrawLinePosition;
+  cp?: DrawArrowPosition;
 }
 
 const Dots = ({ dots, cp }: DotsProps) => {

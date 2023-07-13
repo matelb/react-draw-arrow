@@ -1,4 +1,4 @@
-import { ComponentProps, DrawLinePosition } from "../types";
+import { ComponentProps, DrawArrowPosition } from "../types";
 import { getOffset } from "../utils";
 import { AnimateResult } from "./types";
 
@@ -18,7 +18,7 @@ export function getCurveAnimation(
   const cp1y = mpy + _offset * Math.sin(theta);
 
   // show where the control point is:
-  const cp: DrawLinePosition = {
+  const cp: DrawArrowPosition = {
     x: cp1x,
     y: cp1y,
   };

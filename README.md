@@ -1,6 +1,6 @@
 # react-draw-arrow
 
-Connect components with a simple arrow or line
+Connect components with a simple arrow
 
 ### Getting Started
 
@@ -11,7 +11,7 @@ yarn add react-draw-arrow
 ```
 
 ```jsx
-import { DrawLine, WaterDrop } from "react-draw-arrow";
+import { DrawArrow, WaterDrop } from "react-draw-arrow";
 
 const App = () => {
   const box1 = useRef<HTMLDivElement>(null);
@@ -20,9 +20,9 @@ const App = () => {
     <>
       <div ref={box1} />
       <div ref={box2} />
-      <DrawLine
+      <DrawArrow
         mainComponent={box1}
-        childrens={[box2]}
+        childComponents={[box2]}
         pathConfig={{ blur: true }}
         animate
         animationConfig={{
@@ -44,27 +44,23 @@ const App = () => {
 - https://codesandbox.io/s/suspicious-butterfly-x6hk2g
 - https://codesandbox.io/s/lucid-dijkstra-dn8qpq
 
-### Built-in Box
 
-Box is built with react-draggable, you can use it or use whatever element you want.
+
+### Simple use case
 
 ```jsx
-import { DrawLine, WaterDrop, Box } from "react-draw-arrow";
+import { DrawArrow, WaterDrop } from "react-draw-arrow";
 
 const App = () => {
   const box1 = useRef<HTMLDivElement>(null);
   const box2 = useRef<HTMLDivElement>(null);
   return (
     <>
-      <Box ref={box1} defaultPosition={{ x: 100, y: 50 }}>
-        Box 1
-      </Box>
-      <Box id="box2Id" defaultPosition={{ x: 500, y: 350 }}>
-        Box 2
-      </Box>
-      <DrawLine
+      <div ref={box1} />
+      <div ref={box2} />
+      <DrawArrow
         mainComponent={box1}
-        childrens={["box2Id"]}
+        childComponents={[box2]}
         pathConfig={{ blur: true }}
         animate
         animationConfig={{
@@ -81,7 +77,55 @@ const App = () => {
 };
 ```
 
-### Built-in Animation components
+### Using react-draggable
+
+```jsx
+import { DrawArrow, WaterDrop } from "react-draw-arrow";
+import Draggable from "react-draggable";
+
+const App = () => {
+  const box1 = useRef<HTMLDivElement>(null);
+  const box2 = useRef<HTMLDivElement>(null);
+  return (
+    <>
+       <Draggable
+          bounds="body"
+          position={{x: 100, y: 50}}
+        >
+          <div ref={box1}>
+            Box 1
+          </div>
+        </Draggable>
+       <Draggable
+          bounds="body"
+          position={{x: 300, y: 600}}
+        >
+          <div ref={box2}>
+            Box 2
+          </div>
+        </Draggable>
+      <DrawArrow
+        mainComponent={box1}
+        childComponents={[box2]}
+        pathConfig={{ blur: true }}
+        animate
+        animationConfig={{
+          delay: 1,
+          duration: 3,
+          nItems: 3,
+          curveStyle: "beizer",
+          blur: true,
+        }}
+        animationInput={(props) => <WaterDrop {...props} />}
+      />
+    </>
+  );
+};
+```
+
+
+
+### Animation components
 
 - Circle
 - WaterDrop
@@ -89,7 +133,7 @@ const App = () => {
 #### Circle
 
 ```jsx
-import { DrawLine, Circle } from "react-draw-arrow";
+import { DrawArrow, Circle } from "react-draw-arrow";
 
 const App = () => {
   const box1 = useRef<HTMLDivElement>(null);
@@ -98,9 +142,9 @@ const App = () => {
     <>
       <div ref={box1} />
       <div ref={box2} />
-      <DrawLine
+      <DrawArrow
         mainComponent={box1}
-        childrens={[box2]}
+        childComponents={[box2]}
         pathConfig={{ blur: true }}
         animate
         animationConfig={{
@@ -120,7 +164,7 @@ const App = () => {
 #### WaterDrop
 
 ```jsx
-import { DrawLine, WaterDrop } from "react-draw-arrow";
+import { DrawArrow, WaterDrop } from "react-draw-arrow";
 
 const App = () => {
   const box1 = useRef<HTMLDivElement>(null);
@@ -129,9 +173,9 @@ const App = () => {
     <>
       <div ref={box1} />
       <div ref={box2} />
-      <DrawLine
+      <DrawArrow
         mainComponent={box1}
-        childrens={[box2]}
+        childComponents={[box2]}
         pathConfig={{ blur: true }}
         animate
         animationConfig={{
@@ -211,7 +255,7 @@ const AnimationComponent = ({
 | Property             | Description                                              | Type                                                                             |
 | -------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | mainComponent?       | Main component                                           | RefObject<HTMLElement> or string                                                 |
-| childrens?           | Childrens of main component                              | RefObject<HTMLElement>[] or string[]                                             |
+| childComponents?     | Child components                                         | RefObject<HTMLElement>[] or string[]                                             |
 | animate?             | Animate arrow                                            | boolean                                                                          |
 | showDots?            | Show control position,start point and end point af arrow | boolean                                                                          |
 | showStartArrow?      | Show start arrow marker                                  | boolean                                                                          |

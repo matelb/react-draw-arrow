@@ -4,7 +4,7 @@ import {
   BoxProps,
   ComponentProps,
   DotPosition,
-  DrawLinePosition,
+  DrawArrowPosition,
   HorizontalPosition,
   VerticalPosition,
 } from "./types";
@@ -14,8 +14,8 @@ import { RefObject } from "react";
 
 interface AnimationProps {
   path: string;
-  cp: DrawLinePosition;
-  labelPosition: DrawLinePosition;
+  cp: DrawArrowPosition;
+  labelPosition: DrawArrowPosition;
 }
 
 export const initialValues = {
@@ -248,7 +248,7 @@ export function getAnimation(
     animation = getCubicBeizerAnimation(start, end, offset);
   else if (curveStyle === "curve")
     animation = getCurveAnimation(start, end, offset);
-  else animation = getStraightAnimation(start, end);
+  else animation = getStraightAnimation(start, end, offset);
 
   return animation;
 }

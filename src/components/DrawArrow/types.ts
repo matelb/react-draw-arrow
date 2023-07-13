@@ -7,7 +7,7 @@ export interface PathProps {
   d: string;
 }
 
-export interface DrawLinePosition {
+export interface DrawArrowPosition {
   x: number;
   y: number;
 }

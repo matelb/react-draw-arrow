@@ -1,4 +1,4 @@
-import { ComponentProps, DrawLinePosition } from "../types";
+import { ComponentProps, DrawArrowPosition } from "../types";
 import { getHorizontalPosition, getVerticalPosition } from "../utils";
 import { AnimateResult } from "./types";
 
@@ -11,7 +11,7 @@ export function getCubicBeizerAnimation(
   const length = end.x - start.x;
   const middleX = length / 2 + start.x;
   const middleY = getMiddlePoint(start, end, middleX);
-  const middlePoint: DrawLinePosition = {
+  const middlePoint: DrawArrowPosition = {
     x: middleX,
     y: middleY,
   };
@@ -25,7 +25,7 @@ export function getCubicBeizerAnimation(
   const labelPosition = getControlPoint(
     start,
     end,
-    invertOffset(start, end) ? -_offset : _offset
+    invertOffset(start, end) ? -(_offset / 2) : _offset / 2
   );
 
   const path = `M ${start.x} ${start.y}, Q ${cp.x} ${cp.y}, ${middlePoint.x} ${middlePoint.y} T ${end.x},${end.y}`;
@@ -51,8 +51,8 @@ function invertOffset(start: ComponentProps, end: ComponentProps) {
 }
 
 function getMiddlePoint(
-  pointA: DrawLinePosition,
-  pointB: DrawLinePosition,
+  pointA: DrawArrowPosition,
+  pointB: DrawArrowPosition,
   currentValue: number
 ) {
   const m = (pointB.y - pointA.y) / (pointB.x - pointA.x);
@@ -62,10 +62,10 @@ function getMiddlePoint(
 }
 
 function getControlPoint(
-  start: DrawLinePosition,
-  end: DrawLinePosition,
+  start: DrawArrowPosition,
+  end: DrawArrowPosition,
   offset: number
-): DrawLinePosition {
+): DrawArrowPosition {
   const mpx = (end.x + start.x) * 0.5;
   const mpy = (end.y + start.y) * 0.5;
 
